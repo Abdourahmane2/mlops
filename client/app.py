@@ -109,7 +109,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("### 🔗 Liens utiles")
     st.markdown(f"[📖 Documentation API]({SERVER_URL}/docs)")
-    st.markdown("[🐛 GitHub](https://github.com)")
+    st.markdown("[🐛 GitHub](https://github.com/Abdourahmane2/mlops/)")
 
 # ================================
 # INITIALISATION SESSION STATE
@@ -707,13 +707,4 @@ elif page == "⚙️ API Monitoring":
     st.markdown("### 📖 Documentation API")
     st.markdown("[Ouvrir la documentation Swagger](http://localhost:8000/docs)")
 
-# ================================
-# FOOTER
-# ================================
-st.markdown("---")
-st.markdown("""
-<div style='text-align: center; color: #666; padding: 2rem;'>
-    <p>🧬 Iris ML Platform | Développé avec ❤️ en utilisant Streamlit & FastAPI</p>
-    <p>© 2025 - Tous droits réservés</p>
-</div>
-""", unsafe_allow_html=True)   
+ 
