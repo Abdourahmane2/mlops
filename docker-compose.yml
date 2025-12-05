@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      MONGODB_URL: mongodb://root:password@mongo:27017/
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - mlops-network
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      SERVER_URL: http://server:8000
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - server
+    networks:
+      - mlops-network
+
+volumes:
+  mongo_data:
+
+networks:
+  mlops-network:
+    driver: bridge

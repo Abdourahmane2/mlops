@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pymongo==4.6.0
+joblib
+scikit-learn==1.5.1    # Utilisez la même version que celle utilisée pour entraîner le modèle
+numpy
+pandas 
+streamlit  
+plotly 
